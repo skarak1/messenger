@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "concurrently": "^9.2.1",
+    "cookies-parser": "^1.2.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "formidable": "^3.5.4",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.1",
+    "nodemon": "^3.1.10",
+    "validator": "^13.15.15"
+  },
+  "name": "messenger",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
