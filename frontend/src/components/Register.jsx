@@ -50,10 +50,10 @@ function Register() {
 
                         </div>
                     </div>
-                    <div>
+                    <div className='form-group mb-3'>
                         <input type="submit" value="register" className='btn'/>
                     </div>
-                    <div>
+                    <div className='form-group mb-3'>
                         <span><Link to="/messenger/login" >Login your account</Link></span>
                     </div>
                 </form>
