@@ -5,7 +5,7 @@ export const userRegister = (data) => {
 
           const config = {
                headers: {
-                    'Content-Type':'application/josn'
+                    'Content-Type':'multipart/form-data'
                }
           }
           try{
