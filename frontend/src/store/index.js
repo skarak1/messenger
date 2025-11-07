@@ -1,11 +1,13 @@
 import {legacy_createStore as createStore,compose,combineReducers,applyMiddleware} from 'redux';
+import { authReducer } from './reducers/authReducer';
 
 import { thunk as thunkMiddleware } from 'redux-thunk';
 
-const dummyReducer = (state = {}, action) => state;
+//const dummyReducer = (state = {}, action) => state;
 
 const rootReducer = combineReducers({
-  dummy: dummyReducer
+  //dummy: dummyReducer,
+  auth: authReducer
 });
 
 const middleware = [thunkMiddleware];
