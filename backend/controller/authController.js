@@ -1,6 +1,8 @@
 const formidable = require('formidable');
 const validator = require('validator');
 const registerModel = require('../models/authModel');
+const fs = require('fs');
+const bcrypt = require('bcrypt');
 
 
 module.exports.userRegister = (req, res) => {
@@ -52,9 +54,9 @@ module.exports.userRegister = (req, res) => {
              console.log(getImageName)
              const randNumber = Math.floor(Math.random() * 99999);
              const newImageName = randNumber + getImageName;
-             files.image.originalFilename = newImageName;
+             files.image[0].originalFilename = newImageName;
              console.log(newImageName)
-             const newPath = __dirname + `../../../frontend/public/image/${files.image.originalFilename}`;
+             const newPath = __dirname + `../../../frontend/public/image/${files.image[0].originalFilename}`;
              console.log(newPath)
              try {
                  const checkUser = await registerModel.findOne({
@@ -66,6 +68,18 @@ module.exports.userRegister = (req, res) => {
                              errorMessage: ['Your email already exited']
                          }
                      })
+                 }else{
+                        fs.copyFile(files.image[0].filepath,newPath, async(error) => {
+                        if(!error) {
+                            const userCreate = await registerModel.create({
+                                userName,
+                                email,
+                                password : await bcrypt.hash(password,10),
+                                image: files.image[0].originalFilename
+                            })
+                            console.log('registration Complete successfully')
+                        }
+                    })
                  }
 
              } catch (error) {
