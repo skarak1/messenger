@@ -1,12 +1,30 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT|| 5000;
+const dotenv = require('dotenv')
 
-//data pass
-app.get('/', (req, res) => {
-    res.send('This is from backend server!');
-});
+const databaseConnect = require('./config/database')
+const authRouter = require('./routes/authRoute')
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
+dotenv.config({
+     path : 'backend/config/config.env'
+})
+
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+app.use('/api/messenger',authRouter);
+
+
+const PORT = process.env.PORT || 5000
+app.get('/', (req, res)=>{
+     res.send('This is from backend Sever')
+})
+
+databaseConnect();
+
+app.listen(PORT, ()=>{
+     console.log(`Server is running on port ${PORT}`)
+})
